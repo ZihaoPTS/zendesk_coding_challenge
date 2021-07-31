@@ -1,0 +1,14 @@
+# virtualenv
+.venv/
+
+# IDE config files
+.vscode/
+
+# pycache
+__pycache__
+.pytest_cache
+
+# local testing file
+all_requests.json
+all_tickets.json
+tickets.json
