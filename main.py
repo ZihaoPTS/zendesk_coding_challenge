@@ -1,6 +1,3 @@
-import requests
-import json
-import sys
 import time
 from functions import *
 
