@@ -15,6 +15,8 @@ pytest
 ## Credential/API token
 a file name ```credential.json``` is necessary for the code to access zendesk API gateway. it have to contain following item:
 ```
-"email"
-"api_token"
+{
+"email":"..."
+"api_token":"..."
+}
 ```
