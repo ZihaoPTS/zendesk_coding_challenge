@@ -13,6 +13,8 @@ def GetAllTickets(email,authtoken):
     r = requests.get(api_end_point,auth=(email+'/token',authtoken))
 
     if r.status_code != 200:
+        print("Error connecting to API gate way.")
+        print("Error message:",r.text)
         return None
 
     return r.json()['tickets']

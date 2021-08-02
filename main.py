@@ -6,6 +6,9 @@ if __name__ == '__main__':
     'Please wait while the code work really really hard to retrieve all the tickets')
     credential = GetCredential()
     AllTickets = GetAllTickets(credential['email'],credential['api_token'])
+    if not AllTickets:
+        print("Terminating Program")
+        exit()
     pg = paging(AllTickets,25)
     option = ''
     time.sleep(3)
