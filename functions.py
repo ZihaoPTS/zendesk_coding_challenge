@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 def GetCredential():
     with open('credential.json') as json_file:
@@ -16,8 +17,8 @@ def GetAllTickets(email,authtoken):
 
     return r.json()['tickets']
 
-def Get20Tickets(page_idx,AllTickets):
-    return AllTickets[page_idx*20:page_idx*20+20]
+def Get25Tickets(page_idx,AllTickets):
+    return AllTickets[page_idx*25:page_idx*25+25]
 
 def GetTicketsPrintout(Tickets):
     data = {'id':['id'],'subject':['subject'],'Requester':['Requester'],'created at':['created at']}
@@ -53,17 +54,25 @@ class paging:
         self.display_per_page = display_per_page
     
     def next(self):
-        print(self.current_page * self.display_per_page)
-        if self.current_page * self.display_per_page < self.iteratable_len:
+        if (self.current_page + 1) * self.display_per_page < self.iteratable_len:
             self.current_page += 1
         else:
-            print("This is the last page")
+            print("This is the last page, You saw this because you tried to go to next page")
     
     def previous(self):
         if self.current_page > 0:
             self.current_page -= 1
         else:
-            print("This is the first page")
+            print("This is the first page, You saw this because you tried to go to previous page")
     
     def getpage(self):
         return self.current_page
+
+def clear():
+
+    # for windows
+    if os.name == 'nt':
+        os.system('cls')
+    # for linux
+    else:
+        os.system('clear')

@@ -12,3 +12,4 @@ __pycache__
 all_requests.json
 all_tickets.json
 tickets.json
+credential.json

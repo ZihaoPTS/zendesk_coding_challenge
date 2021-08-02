@@ -1,15 +1,12 @@
-import pytest
-import json
 from functions import *
 
 def test_GetCredential():
-    print("Test retrieving credential")
     credential = GetCredential()
     assert 'email' in credential
     assert 'api_token' in credential
 
 def test_GetAllTickets():
-    print("Test getting ticket via API")
+    #Test getting ticket via API
     credential = GetCredential()
     AllTickets = GetAllTickets(credential['email'],credential['api_token'])
     assert len(AllTickets) > 0 
@@ -26,18 +23,45 @@ def test_GetAllTickets():
     assert 'created_at' in AllTickets[0]
     assert 'updated_at' in AllTickets[0]
     apifault = GetAllTickets('','')
-    print("making sure function return None when status code is not 200")
+    #making sure function return None when status code is not 200
     assert apifault == None
 
-def test_Get20Tickets():
-    print("confriming Get20Tickets working in different corner cases")
+def test_Get25Tickets():
+    #confriming Get25Tickets working in different corner cases
     AllTickets = []
-    for x in range(87):
+    for x in range(107):
         AllTickets.append(x)
-    tickets_idx_1 = Get20Tickets(1,AllTickets)
-    tickets_idx_4 = Get20Tickets(4,AllTickets)
-    assert tickets_idx_1 == AllTickets[20:40]
-    assert tickets_idx_4 == AllTickets[80:87]
+    tickets_idx_1 = Get25Tickets(1,AllTickets)
+    tickets_idx_4 = Get25Tickets(4,AllTickets)
+    assert tickets_idx_1 == AllTickets[25:50]
+    assert tickets_idx_4 == AllTickets[100:107]
+    #test for less then 25 tickets
+    sometickets = []
+    for x in range(13):
+        AllTickets.append(x)
+    st = Get25Tickets(0,sometickets)
+    assert st == sometickets
+
 
 def test_GetTicketsPrintout():
-    assert True
+    credential = GetCredential()
+    AllTickets = GetAllTickets(credential['email'],credential['api_token'])
+    t_0_25 = Get25Tickets(0,AllTickets)
+    t_printout = GetTicketsPrintout(t_0_25)
+    assert 'id' in t_printout[0]
+    assert len(t_printout[0]) == len(t_printout[1])
+
+def test_paging():
+    empty_list = ['']*101
+    pg = paging(empty_list,25) #should have 5 page
+    pg.next()
+    assert pg.current_page == 1
+    for x in range(7): #run next page 6 time
+        pg.next()
+    assert pg.current_page == 4
+    pg.previous()
+    assert pg.current_page == 3
+    for x in range(7): #run next page 6 time
+        pg.previous()
+    assert pg.current_page == 0
+    
