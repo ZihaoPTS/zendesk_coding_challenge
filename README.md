@@ -20,3 +20,4 @@ a file name ```credential.json``` is necessary for the code to access zendesk AP
 "api_token":"..."
 }
 ```
+and should be placed on the root directory.
