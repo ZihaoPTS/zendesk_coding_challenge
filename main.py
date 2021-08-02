@@ -14,14 +14,7 @@ if __name__ == '__main__':
     time.sleep(3)
     clear()
 
-    def get_option():
-        option = input('For next page, type N\n'+ \
-        'For previous page, type P\n'+ \
-        'For quit, type Q\n'+ \
-        'To see detail about specific ticket, type ticket number:')
-        clear()
-        return option
-    def print_current_page():
+    def print_current_page(): #helper function, no test needed
         print('You are currently at page {}'.format(pg.getpage()))
         tickets = Get25Tickets(pg.getpage(),AllTickets)
         printout = GetTicketsPrintout(tickets)

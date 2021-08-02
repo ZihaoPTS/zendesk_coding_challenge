@@ -9,7 +9,5 @@ __pycache__
 .pytest_cache
 
 # local testing file
-all_requests.json
-all_tickets.json
 tickets.json
 credential.json

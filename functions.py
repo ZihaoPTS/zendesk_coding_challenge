@@ -69,7 +69,6 @@ class paging:
     
     def getpage(self):
         return self.current_page
-
 def clear():
 
     # for windows
@@ -78,3 +77,10 @@ def clear():
     # for linux
     else:
         os.system('clear')
+def get_option():
+    option = input('For next page, type N\n'+ \
+    'For previous page, type P\n'+ \
+    'For quit, type Q\n'+ \
+    'To see detail about specific ticket, type ticket number:')
+    clear()
+    return option
